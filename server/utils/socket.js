@@ -22,7 +22,7 @@ const initializeSocketIO = (io) => {
         }
         
         socket.user = decodedToken;
-
+        
         socket.join(decodedToken.userId);
         socket.emit("connected");
         console.log("connected ", decodedToken.userId,"using socket");
@@ -39,14 +39,15 @@ const initializeSocketIO = (io) => {
     socket.on("disconnect",  () => {
       console.log("user has disconnected 🚫. userId: " + socket.user?.userId);
       if (socket.user?.id) {
-        socket.leave(socket.user.id);
+        socket.leave(socket.user.id);//roomleave
       }
     });
   });
 };
-const emitSocketEvent = (req,receiverId,event,payload) => {
+const emitSocketEvent = (req,receiverId,event,payload) => {//to send the meesaage to recevier end
   req.app.get("io").to(receiverId).emit(event, payload);
 };
+
 module.exports = {
   initializeSocketIO,
   emitSocketEvent

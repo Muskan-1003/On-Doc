@@ -21,17 +21,21 @@ const io = new Server(httpServer, {
   },
 });
 app.use(cors());
+<<<<<<< Updated upstream
 app.get("/",(req,res)=>{
   res.send("Welcome to API")
 })
 app.use(express.json());
+=======
+app.use(express.json());//middleware
+>>>>>>> Stashed changes
 app.use("/api/user", userRouter);
 app.use("/api/doctor", doctorRouter);
 app.use("/api/appointment", appointRouter);
 app.use("/api/notification", notificationRouter);
 app.use("/api/message",messagingRouter)
 
-app.set("io", io);
+app.set("io", io);//it is setting i0 code in express
 httpServer.listen(port, () => {
     console.log(`listening on port ${port}`)
 });
@@ -39,13 +43,7 @@ httpServer.listen(port, () => {
 
 io.on("connection",(socket)=>{
     console.log('connected',socket.id);
-
-
-
-
-
-
-
+    
 
 })
 initializeSocketIO(io)

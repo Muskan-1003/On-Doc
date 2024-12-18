@@ -55,7 +55,7 @@ function App({chatBotClickHandler}) {
   body: JSON.stringify({
     "model": "Meta-Llama-3-8B-Instruct",
     "messages": [
-      {"role": "user", "content": "explain me anything like a doctor"},
+      {"role": "user", "content": "explain me everything about medicine"},
     ],
   })
 });

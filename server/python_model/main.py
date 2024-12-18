@@ -1,8 +1,8 @@
 # Importing libraries
-import numpy as np
-import sys 
-import pickle
-from scipy.stats import mode
+import numpy as np 
+import sys #
+import pickle #Loads pre-trained machine learning models and other data from serialized files.
+from scipy.stats import mode 
 
 with open('final_svm_model.pickle', 'rb') as f:
     final_svm_model = pickle.load(f)
@@ -22,6 +22,7 @@ with open('new_encoder_y.pickle', 'rb') as f:
     new_encoder_y  = pickle.load(f)    
 
 
+#Stores mappings for symptoms  and possible diseases
 data_dict = {
 	"symptom_index":symptom_index,
 	"predictions_classes":encoder.classes_
@@ -29,10 +30,9 @@ data_dict = {
 
 
 
-
 def predictDisease(symptoms):
 	symptoms = symptoms.split(",")
-	input_data = [0] * len(data_dict["symptom_index"])
+	input_data = [0] * len(data_dict["symptom_index"]) # adding index on each symptoms
 	for symptom in symptoms:
 		index = data_dict["symptom_index"][symptom]
 		input_data[index] = 1	
@@ -66,7 +66,8 @@ def predict_doctor(disease):
     except:
         return "General Physician"
 
-Userinput =sys.argv
+
+Userinput =sys.argv 
 finalInput = " ".join(Userinput[1:])
 T = predictDisease(finalInput)
 user_input_disease = data_dict["predictions_classes"][T["final_prediction"]]
